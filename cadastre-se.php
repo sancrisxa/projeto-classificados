@@ -7,14 +7,44 @@
 
             $usuario = new Usuarios();
 
+            
+
             if(isset($_POST['nome']) && !empty($_POST['nome'])) {
                 $nome = addslashes($_POST['nome']);
                 $email = addslashes($_POST['email']);
                 $telefone = addslashes($_POST['telefone']);
+                $senha = addslashes($_POST['senha']);
 
                 if(!empty($nome) && !empty($email) && !empty($senha)) {
 
-                    $usuario->cadastrar($nome, $email, $senha, $telefone);
+
+
+                    if($usuario->cadastrar($nome, $email, $senha, $telefone)) {
+
+                        ?>
+
+                            <div class="alert alert-success">
+                                <strong> Parabéns </strong> Cadastrado com sucesso.
+                                <a href="login.php" class="alert-link">Faça o login agora</a>
+                            </div>
+
+                        <?php 
+
+
+                    } else {
+                       
+                        ?>
+
+                            <div class="alert alert-warning">
+                                Este usuário já existe 
+                                <a href="login.php" class="alert-link">Faça o login agora</a>
+                            </div>
+
+                        <?php 
+
+                    }
+
+
                 } else {
 
                     ?>
@@ -32,7 +62,7 @@
         
         
         ?>
-        <form method="post">
+        <form method="post" action="">
             <div class="form-group">
                 <label for="nome">Nome:</label>
                 <input type="text" name="nome" id="nome" class="form-control">
