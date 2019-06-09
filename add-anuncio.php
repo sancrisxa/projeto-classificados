@@ -67,8 +67,8 @@ if(isset($_POST['titulo']) && !empty($_POST['titulo'])) {
             <input type="text" name="valor" id="valor" class="form-control">
         </div>   
         <div class="form-group">
-            <label for="descricao">Descrição:</label>
-            <textarea name="descricao" id="descricao" cols="30" rows="10"></textarea>
+            <label for="descricao">Descrição:</label><br>
+            <textarea name="descricao" id="descricao" cols="30" rows="10" class="form-control"></textarea>
         </div>   
         <div class="form-group">
             <label for="estado">Estado de Conservação:</label>
