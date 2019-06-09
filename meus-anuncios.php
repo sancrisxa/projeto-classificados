@@ -1,4 +1,5 @@
 <?php require 'pages/header.php';?>
+<?php require 'classes/anuncios.class.php';?>
 <?php 
 
     if(empty($_SESSION['cLogin'])) {
@@ -30,16 +31,20 @@
             </tr>
         </thead>
         <?php
-            require 'classes/anuncios.class.php';
 
             $anuncios = new Anuncios();
             $anuncios = $anuncios->getMeusAnuncios();
+
             
             foreach ($anuncios as $anuncio) :    
         ?>
             <tr>
                <td>
-                   <img src="assets/images/anuncios/<?php echo $anuncio['url'];?>" alt="" border="0">
+                    <?php if(!empty($anuncio['url'])) : ?>
+                        <img src="assets/images/anuncios/<?php echo $anuncio['url'];?>" alt="" border="0" height="50">
+                    <?php else:?>
+                        <img src="assets/images/default.png" alt="" border="0" height="50">  
+                    <?php endif;?>
                </td> 
                <td>
                    <?php echo $anuncio['titulo'];?>
@@ -47,7 +52,10 @@
                <td>
                    R$ <?php echo number_format($anuncio['valor'], 2)?>
                </td>
-               <td></td>
+               <td>
+                   <a href="editar-anuncio.php?id=<?php echo $anuncio['id'];?>" class="btn btn-default">Editar</a>
+                   <a href="excluir-anuncio.php?id=<?php echo $anuncio['id'];?>" class="btn btn-danger">Excluir</a>
+               </td>
             </tr>
         <?php endforeach;?>
     </table>
